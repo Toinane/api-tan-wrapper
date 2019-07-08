@@ -1,22 +1,12 @@
-const tan = require('./index');
+const TanWrapper = require('./index');
 
 async function main() {
-  const stations = await tan.getStations();
+  const tan = new TanWrapper();
 
-  let result = [];
+  const stations = await tan.getAllStations();
+  const similar = tan.getSimilarStationsName('beausejour', tan.parseStationsToList(stations), 10);
 
-  stations.map(station => {
-    let place = {
-      value: station.libelle,
-      synonyms: []
-    }
-
-    if(station.ligne.filter(l => l.numLigne == 1 || l.numLigne == 2 || l.numLigne == 3).length > 0) {
-      result.push(place);
-    }
-  })
-
-  console.log(result)
+  console.log(similar)
 }
 
 (main)()
