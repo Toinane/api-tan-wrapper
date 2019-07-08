@@ -27,14 +27,26 @@ const tan = new TanWrapper({
 // Get all stations
 await tan.getAllStations();
 
+// Get stations in a 500m range of the location
+async getStationsWithLocation(latitude, longitude)
+
 // Get all tram stations
 await tan.getAllTramStations();
 
 // Get all bus stations
 await tan.getAllBusStations();
 
+// Get waiting time from station
+await tan.getWaitingTimeFromStation('beaujoire', 'name'); // or tan.getWaitingTimeFromStation('bjoi');
+
 // Get array of stations name
 tan.parseStationsToList(stations); // stations here is the result of tan.getAllStations();
+
+// Get station from station name
+await tan.getStationFromCode('beaujoire');
+
+// Get station from code
+await tan.getStationFromCode('bjoi');
 
 // Get similar stations name
 tan.getSimilarStationsName('beauséjour', ['beaujoire', 'commerce', ...], 2); // 2 is the number of similar stations you want to get in return

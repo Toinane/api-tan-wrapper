@@ -29,6 +29,19 @@ class TanWrapper {
     }
   }
 
+  async getStationsWithLocation(latitude, longitude) {
+    latitude.replace('.', ',');
+    longitude.replace('.', ',');
+
+    try {
+      const response = await this.request(`arrets.json/${latitude}/${longitude}`);
+      return response.data;
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async getAllTramStations() {
     const stations = await this.getAllStations();
 
@@ -45,6 +58,38 @@ class TanWrapper {
       const lignes = station.ligne.filter(ligne => parseInt(ligne.numLigne) <= this.totalTramLine)
       return lignes.length < station.ligne.length;
     })
+  }
+
+  async getWaitingTimeFromStation(station, type = 'code') {
+    if (type === 'name') {
+      try {
+        const result = await this.getStationFromStationName(station);
+        station = result.codeLieu;
+      }
+      catch(error) {
+        throw new Error('You send a name that didn\'t exist : ' + station);
+      }
+    }
+
+    try {
+      const response = await this.request('tempsattente.json/' + station);
+      return response.data;
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getStationFromCode(code) {
+    const stations = await this.getAllStations();
+    
+    return stations.filter(station => station.codeLieu.toLowerCase() === code.toLowerCase())[0];
+  }
+
+  async getStationFromStationName(stationName) {
+    const stations = await this.getAllStations();
+    
+    return stations.filter(station => station.libelle.toLowerCase() === stationName.toLowerCase())[0];
   }
 
   parseStationsToList(stations) {
