@@ -1,6 +1,6 @@
 {
   "name": "api-tan-wrapper",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "repository": "https://github.com/Toinane/api-tan-wrapper.git",
   "author": "Toinane <toinane@crea-that.fr>",
