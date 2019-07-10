@@ -28,7 +28,7 @@ const tan = new TanWrapper({
 await tan.getAllStations();
 
 // Get stations in a 500m range of the location
-async getStationsWithLocation(latitude, longitude)
+await tan.getStationsWithLocation(latitude, longitude)
 
 // Get all tram stations
 await tan.getAllTramStations();
@@ -36,8 +36,11 @@ await tan.getAllTramStations();
 // Get all bus stations
 await tan.getAllBusStations();
 
-// Get waiting time from station
+// Get waiting time at station
 await tan.getWaitingTimeFromStation('beaujoire', 'name'); // or tan.getWaitingTimeFromStation('bjoi');
+
+// Get times from station
+await tan.getTimesFromStation('beaujoire', 'name', 1, 2); // or tan.getTimesFromStation('bjoi', 1, 2);
 
 // Get array of stations name
 tan.parseStationsToList(stations); // stations here is the result of tan.getAllStations();
