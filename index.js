@@ -34,7 +34,7 @@ class TanWrapper {
     longitude.replace('.', ',');
 
     try {
-      const response = await this.request(`arrets.json/${latitude}/${longitude}`);
+      const response = await this.request("arrets.json/${latitude}/${longitude}");
       return response.data;
     }
     catch (error) {
@@ -72,7 +72,27 @@ class TanWrapper {
     }
 
     try {
-      const response = await this.request('tempsattente.json/' + station);
+      const response = await this.request("tempsattente.json/${station}");
+      return response.data;
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getTimesFromStation(station, type = 'code', line, direction) {
+    if (type === 'name') {
+      try {
+        const result = await this.getStationFromStationName(station);
+        station = result.codeLieu;
+      }
+      catch (error) {
+        throw new Error('You send a name that didn\'t exist : ' + station);
+      }
+    }
+
+    try {
+      const response = await this.request("horairesarret.json/${station}/${line}/${direction}");
       return response.data;
     }
     catch (error) {
@@ -82,13 +102,13 @@ class TanWrapper {
 
   async getStationFromCode(code) {
     const stations = await this.getAllStations();
-    
+
     return stations.filter(station => station.codeLieu.toLowerCase() === code.toLowerCase())[0];
   }
 
   async getStationFromStationName(stationName) {
     const stations = await this.getAllStations();
-    
+
     return stations.filter(station => station.libelle.toLowerCase() === stationName.toLowerCase())[0];
   }
 
@@ -106,8 +126,6 @@ class TanWrapper {
     levelStations.sort((current, next) => current.level - next.level)
     return levelStations.slice(0, numberToKeep);
   }
-
-
 }
 
 module.exports = TanWrapper;
