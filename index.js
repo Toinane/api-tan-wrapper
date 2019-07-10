@@ -34,7 +34,7 @@ class TanWrapper {
     longitude.replace('.', ',');
 
     try {
-      const response = await this.request("arrets.json/${latitude}/${longitude}");
+      const response = await this.request(`arrets.json/${latitude}/${longitude}`);
       return response.data;
     }
     catch (error) {
@@ -72,7 +72,7 @@ class TanWrapper {
     }
 
     try {
-      const response = await this.request("tempsattente.json/${station}");
+      const response = await this.request(`tempsattente.json/${station}`);
       return response.data;
     }
     catch (error) {
@@ -92,7 +92,7 @@ class TanWrapper {
     }
 
     try {
-      const response = await this.request("horairesarret.json/${station}/${line}/${direction}");
+      const response = await this.request(`horairesarret.json/${station}/${line}/${direction}`);
       return response.data;
     }
     catch (error) {
