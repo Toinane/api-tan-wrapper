@@ -1,6 +1,6 @@
 {
   "name": "api-tan-wrapper",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "index.js",
   "repository": "https://github.com/Toinane/api-tan-wrapper.git",
   "author": "Toinane <toinane@crea-that.fr>",
@@ -10,7 +10,7 @@
     "test": "node index.test.js"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "fast-levenshtein": "^2.0.6"
+    "axios": "^0.21.1",
+    "fast-levenshtein": "^3.0.0"
   }
 }
