@@ -10,7 +10,7 @@
     "test": "node index.test.js"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "fast-levenshtein": "^3.0.0"
   }
 }
